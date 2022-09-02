@@ -15,7 +15,8 @@ const displayCategories = (categories) => {
         `
         categoriesContainer.appendChild(categoryDiv);
 
-
+        // adding event handler for click on the categories
+        
     }
 }
 

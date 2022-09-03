@@ -9,6 +9,18 @@ const loadCategories = async () => {
     }
 }
 
+// Spinner Function
+const toggleSpinner = (isLoading) => {
+    const spinnerDiv = document.getElementById("spinner");
+    if (isLoading) {
+        spinnerDiv.classList.remove("d-none");
+    }
+    else {
+        spinnerDiv.classList.add("d-none");
+    }
+}
+
+
 const categoriesTypeArray = [];
 
 const displayCategories = (categories) => {
@@ -19,25 +31,31 @@ const displayCategories = (categories) => {
 
         const categoryDiv = document.createElement("div");
         categoryDiv.classList.add("cursor-pointer");
+
         categoryDiv.innerHTML = `
             <h5 onclick="loadNews(${category.category_id})">${category.category_name}</h5>
         `
         categoriesContainer.appendChild(categoryDiv);
     })
+
 }
 
 
 
 const loadNews = async (categoryId) => {
+    // Start Spinner
+    toggleSpinner(true);
     const addingZero = "0" + categoryId;
     const url = `https://openapi.programming-hero.com/api/news/category/${addingZero}`;
     const res = await fetch(url);
     const data = await res.json();
     displayNews(data.data);
+
+
 }
 
 
-console.log(categoriesTypeArray);
+// console.log(categoriesTypeArray);
 
 const displayNews = (allNews) => {
     // Displaying the availble number of news for the clicked news category
@@ -80,12 +98,12 @@ const displayNews = (allNews) => {
                         src="${news.author.img}" alt="">
                     </div>
                     <div class="d-flex flex-column ms-2">
-                        <h5>${news.author.name}</h5>
+                        <h5>${news.author?.name || "No Info Available"}</h5>
                         <p>${news.author?.published_date || "Publication Date Not Avaiable"}</p>
                     </div>
                     </div>
                         <div class="d-flex align-items-center">
-                            <h5>Views: ${news.total_view}</h5>
+                            <h5>Views: ${news?.total_view || "No Info Available"}</h5>
                         </div>
                     <div class="d-flex align-items-center">
                         <button onclick="loadNewsDetails('${news._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details
@@ -97,6 +115,9 @@ const displayNews = (allNews) => {
         `
         newsContainer.appendChild(newsDiv);
     }
+
+    // stop spinner
+    toggleSpinner(false);
 
 }
 
@@ -133,12 +154,12 @@ const displayNewsDetails = (newsDetails) => {
                             <img class="img-fluid" src="${newsDetails.author.img}" alt="">
                         </div>
                         <div class="d-flex flex-column ms-2">
-                            <h5>${newsDetails.author.name}</h5>
+                            <h5>${newsDetails.author?.name || "Author Name Not Available"}</h5>
                             <p>${newsDetails.author?.published_date || "Publication Date Not Avaiable"}</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
-                        <h5>Total View: ${newsDetails.total_view}</h5>
+                        <h5>Total View: ${newsDetails?.total_view || "No info avaiable"}</h5>
                     </div>
             </div>
             
@@ -156,6 +177,8 @@ const displayNewsDetails = (newsDetails) => {
         `
     newsDetailsContainer.appendChild(modalDiv);
 }
+
+
 
 loadNews();
 loadCategories();

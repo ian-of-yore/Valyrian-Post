@@ -37,10 +37,10 @@ const displayNews = (allNews) => {
         const newsDiv = document.createElement("div");
         newsDiv.classList.add("row", "m-3", "border", "p-2")
         newsDiv.innerHTML = `
-        <div class="col-md-4">
+        <div class="col-md-2">
             <img class="img-fluid" src="${news.thumbnail_url}" class="w-100">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card-block ">
                 <h4 class="card-title">${news.title}</h4>
                 <p class="card-text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -89,7 +89,6 @@ const loadNewsDetails = async (news_id) => {
 }
 
 const displayNewsDetails = (newsDetails) => {
-    console.log(newsDetails);
     const newsDetailsContainer = document.getElementById("news-details-container");
     newsDetailsContainer.innerHTML = ``;
     const modalDiv = document.createElement("div");
@@ -100,11 +99,34 @@ const displayNewsDetails = (newsDetails) => {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+            <img class="img-fluid mb-3" src="${newsDetails.image_url}" alt="">
+            <p>${newsDetails.details}</p>
+
+            <div class="d-flex justify-content-between">
+                    <div class="d-flex">
+                        <div style="height: 3.5vh; width: 3.5vw;">
+                            <img class="img-fluid" src="${newsDetails.author.img}" alt="">
+                        </div>
+                        <div class="d-flex flex-column ms-2">
+                            <h5>${newsDetails.author.name}</h5>
+                            <p>${newsDetails.author.published_date.split(" ")[0]}</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <h5>Total View: ${newsDetails.total_view}</h5>
+                    </div>
+            </div>
+            
+
+        </div>
             
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Rating: ${newsDetails.rating.number}</button>
-            <button type="button" class="btn btn-primary">Badge: ${newsDetails.rating.badge}</button>
+        <button type="button" class="btn btn-secondary">Today's Pick: ${newsDetails.others_info.is_todays_pick}</button>
+        <button type="button" class="btn btn-secondary">Trending: ${newsDetails.others_info.is_trending}</button>
+            <button type="button" class="btn btn-secondary">Rating: ${newsDetails.rating.number}</button>
+            <button type="button" class="btn btn-secondary">Badge: ${newsDetails.rating.badge}</button>
+
         </div>
         `
     newsDetailsContainer.appendChild(modalDiv);

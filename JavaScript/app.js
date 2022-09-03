@@ -46,11 +46,12 @@ const displayNews = (allNews) => {
     const newsCategoryElement = document.getElementById("news-category");
     newsCategoryElement.innerText = "";
     const newsTypeLength = allNews.length;
+
     if (newsTypeLength === 0) {
         newsNumberElement.innerText = "No News Items found for this category";
     }
     else {
-        const currentNewsType = ((allNews[0].category_id) - 1);
+        const currentNewsType = ((allNews[0].category_id) - 01);
         const newsCategory = categoriesTypeArray[currentNewsType];
         newsNumberElement.innerText = newsTypeLength + " ";
         newsCategoryElement.innerText = "Items found for " + newsCategory + " Category";
@@ -80,7 +81,7 @@ const displayNews = (allNews) => {
                     </div>
                     <div class="d-flex flex-column ms-2">
                         <h5>${news.author.name}</h5>
-                        <p>${news.author.published_date.split(" ")[0]}</p>
+                        <p>${news.author?.published_date || "Publication Date Not Avaiable"}</p>
                     </div>
                     </div>
                         <div class="d-flex align-items-center">
@@ -133,7 +134,7 @@ const displayNewsDetails = (newsDetails) => {
                         </div>
                         <div class="d-flex flex-column ms-2">
                             <h5>${newsDetails.author.name}</h5>
-                            <p>${newsDetails.author.published_date.split(" ")[0]}</p>
+                            <p>${newsDetails.author?.published_date || "Publication Date Not Avaiable"}</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
@@ -156,5 +157,5 @@ const displayNewsDetails = (newsDetails) => {
     newsDetailsContainer.appendChild(modalDiv);
 }
 
-loadNews(05);
+loadNews();
 loadCategories();

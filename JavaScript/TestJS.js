@@ -7,18 +7,16 @@ const loadCategories = async () => {
     } catch (error) {
         console.log(error);
     }
-    // const url = `https://openapi.programming-hero.com/api/news/categories`;
-    // const res = await fetch(url);
-    // const data = await res.json();
-    // displayCategories(data.data.news_category);
-
 }
 
+// const categoriesTypeArray = [];
 
 const displayCategories = (categories) => {
     // console.log(categories);
     const categoriesContainer = document.getElementById("categories-container");
     categories.forEach(category => {
+        // categoriesTypeArray.push(category.category_name);
+
         const categoryDiv = document.createElement("div");
         categoryDiv.classList.add("cursor-pointer");
         categoryDiv.innerHTML = `
@@ -28,6 +26,8 @@ const displayCategories = (categories) => {
     })
 }
 
+
+
 const loadNews = async (categoryId) => {
     const addingZero = "0" + categoryId;
     const url = `https://openapi.programming-hero.com/api/news/category/${addingZero}`;
@@ -36,12 +36,28 @@ const loadNews = async (categoryId) => {
     displayNews(data.data);
 }
 
+
+// console.log(categoriesTypeArray);
+
 const displayNews = (allNews) => {
-    // console.log(allNews);
+    // Displaying the availble number of news for the clicked news category
+
+    // const newsTypeLength = allNews.length;
+    // // console.log(newsTypeLength);
+    // const newsCategory = categoriesTypeArray[((allNews[0].category_id) - 1)];
+    // console.log(newsCategory);
+
+    // const newsNumberElement = document.getElementById("news-number");
+    // newsNumberElement.innerText = newsTypeLength;
+    // const newsCategoryElement = document.getElementById("news-category");
+    // newsCategoryElement.innerText = newsCategory;
+
+
+
     const newsContainer = document.getElementById("news-container");
     newsContainer.innerHTML = ``;
     for (const news of allNews) {
-        // console.log(news._id);
+        // console.log(news.category_id);
         const newsDiv = document.createElement("div");
         newsDiv.classList.add("row", "m-3", "border", "p-2")
         newsDiv.innerHTML = `
@@ -98,10 +114,6 @@ const loadNewsDetails = async (news_id) => {
     catch (error) {
         console.log(error);
     }
-    // url = `https://openapi.programming-hero.com/api/news/${news_id}`;
-    // const res = await fetch(url);
-    // const data = await res.json();
-    // displayNewsDetails(data.data[0]);
 }
 
 const displayNewsDetails = (newsDetails) => {
@@ -147,7 +159,6 @@ const displayNewsDetails = (newsDetails) => {
         `
     newsDetailsContainer.appendChild(modalDiv);
 }
-
 
 loadNews(02);
 loadCategories();

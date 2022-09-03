@@ -32,7 +32,6 @@ const displayNews = (allNews) => {
     const newsContainer = document.getElementById("news-container");
     newsContainer.innerHTML = ``;
     for (const news of allNews) {
-        console.log(news);
         const newsDiv = document.createElement("div");
         newsDiv.classList.add("grid", "grid-rows-3", "grid-flow-col", "gap-4", "mb-4", "border-2", "border-oranger-900", "p-6");
         newsDiv.innerHTML = `
@@ -86,5 +85,5 @@ const displayNews = (allNews) => {
 
 
 
-
+loadNews(02);
 loadCategories();

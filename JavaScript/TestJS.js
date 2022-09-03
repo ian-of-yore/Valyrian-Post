@@ -1,23 +1,31 @@
 const loadCategories = async () => {
-    const url = `https://openapi.programming-hero.com/api/news/categories`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayCategories(data.data.news_category);
+    try {
+        const url = `https://openapi.programming-hero.com/api/news/categories`;
+        const res = await fetch(url);
+        const data = await res.json();
+        displayCategories(data.data.news_category);
+    } catch (error) {
+        console.log(error);
+    }
+    // const url = `https://openapi.programming-hero.com/api/news/categories`;
+    // const res = await fetch(url);
+    // const data = await res.json();
+    // displayCategories(data.data.news_category);
+
 }
+
 
 const displayCategories = (categories) => {
     // console.log(categories);
     const categoriesContainer = document.getElementById("categories-container");
-    for (const category of categories) {
+    categories.forEach(category => {
         const categoryDiv = document.createElement("div");
         categoryDiv.classList.add("cursor-pointer");
         categoryDiv.innerHTML = `
             <h5 onclick="loadNews(${category.category_id})">${category.category_name}</h5>
         `
         categoriesContainer.appendChild(categoryDiv);
-
-        // adding event handler for click on the categories
-    }
+    })
 }
 
 const loadNews = async (categoryId) => {
@@ -81,11 +89,19 @@ const displayNews = (allNews) => {
 
 
 const loadNewsDetails = async (news_id) => {
-    url = `https://openapi.programming-hero.com/api/news/${news_id}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayNewsDetails(data.data[0]);
-
+    try {
+        url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        displayNewsDetails(data.data[0]);
+    }
+    catch (error) {
+        console.log(error);
+    }
+    // url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+    // const res = await fetch(url);
+    // const data = await res.json();
+    // displayNewsDetails(data.data[0]);
 }
 
 const displayNewsDetails = (newsDetails) => {

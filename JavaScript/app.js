@@ -10,6 +10,7 @@ const displayCategories = (categories) => {
     const categoriesContainer = document.getElementById("categories-container");
     for (const category of categories) {
         const categoryDiv = document.createElement("div");
+        categoryDiv.classList.add("cursor-pointer");
         categoryDiv.innerHTML = `
             <h5 onclick="loadNews(${category.category_id})">${category.category_name}</h5>
         `
@@ -32,6 +33,7 @@ const displayNews = (allNews) => {
     const newsContainer = document.getElementById("news-container");
     newsContainer.innerHTML = ``;
     for (const news of allNews) {
+        console.log(news._id);
         const newsDiv = document.createElement("div");
         newsDiv.classList.add("grid", "grid-rows-3", "grid-flow-col", "gap-4", "mb-4", "border-2", "border-oranger-900", "p-6");
         newsDiv.innerHTML = `
@@ -77,6 +79,18 @@ const displayNews = (allNews) => {
 }
 
 
+const loadNewsDetails = async (news_id) => {
+    // url = `https://openapi.programming-hero.com/api/news/{news_id}`;
+    // const res = await fetch(url);
+    // const data = await res.json();
+    // console.log(data);
+    // console.log(news_id);
+
+}
+
+const displayNewsDetails = () => {
+    console.log("lmao news details shown");
+}
 
 
 

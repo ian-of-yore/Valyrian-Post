@@ -60,15 +60,16 @@ const displayNews = (allNews) => {
                         </div>
                         <div class="col-span-3 me-6 pt-2">
                             <h1 class="text-xl">${news.author.name} </h1>
-                            <p>Published On: ${news.author.published_date.split(" ")[0]} </p>
+                            <p class="text-xl">${news.author.published_date.split(" ")[0]} </p>
                         </div>
                         <div class="col-span-4 text-center ml-28 pl-16 pt-6">
                             <h1 class="text-2xl">View: ${news.total_view}</h1>
                         </div>
-                        <div class="col-span-4 text-end pt-6"><button onclick="loadNewsDetails('${news._id}')" 
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                                Details
-                            </button></div>
+                        <div class="col-span-4 text-end pt-6">
+                            <button onclick="loadNewsDetails('${news._id}')" class="block text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button" data-modal-toggle="popup-modal">
+                                    Details
+                            </button>
+                            </div>
                     </div>
             </div>
         
@@ -90,12 +91,6 @@ const loadNewsDetails = async (news_id) => {
 const displayNewsDetails = (newsDetails) => {
     console.log(newsDetails);
 }
-
-
-
-
-
-
 
 
 loadNews(02);

@@ -33,7 +33,7 @@ const displayCategories = (categories) => {
         categoryDiv.classList.add("cursor-pointer");
 
         categoryDiv.innerHTML = `
-            <h5 onclick="loadNews(${category.category_id})">${category.category_name}</h5>
+            <h5 onclick='loadNews(${category.category_id}, "${category.category_name}")'>${category.category_name}</h5>
         `
         categoriesContainer.appendChild(categoryDiv);
     })
@@ -42,39 +42,27 @@ const displayCategories = (categories) => {
 
 
 
-const loadNews = async (categoryId) => {
+const loadNews = async (categoryId, categoryName) => {
     // Start Spinner
     toggleSpinner(true);
     const addingZero = "0" + categoryId;
     const url = `https://openapi.programming-hero.com/api/news/category/${addingZero}`;
     const res = await fetch(url);
     const data = await res.json();
-    displayNews(data.data);
-
-
+    displayNews(data.data, categoryName);
 }
 
 
-// console.log(categoriesTypeArray);
+const newsAmountContainer = document.getElementById("news-amount-container");
+const displayNews = (allNews, categoryName) => {
 
-const displayNews = (allNews) => {
-    // Displaying the availble number of news for the clicked news category
-
-    const newsNumberElement = document.getElementById("news-number");
-    const newsCategoryElement = document.getElementById("news-category");
-    newsCategoryElement.innerText = "";
-    const newsTypeLength = allNews.length;
-
-    if (newsTypeLength === 0) {
-        newsNumberElement.innerText = "No News Items found for this category";
-    }
-    else {
-        const currentNewsType = ((allNews[0].category_id) - 01);
-        const newsCategory = categoriesTypeArray[currentNewsType];
-        newsNumberElement.innerText = newsTypeLength + " ";
-        newsCategoryElement.innerText = "Items found for " + newsCategory + " Category";
-
-    }
+    // Showing the amount of items found for news category
+    newsAmountContainer.innerHTML = ``;
+    const newsAmountDiv = document.createElement("div");
+    newsAmountDiv.innerHTML = `
+        <h4>${allNews.length} Items found for ${categoryName} category</h4>
+    `
+    newsAmountContainer.appendChild(newsAmountDiv);
 
     // Sorting all news
     // console.log(allNews);
@@ -128,6 +116,8 @@ const displayNews = (allNews) => {
     toggleSpinner(false);
 
 }
+
+
 
 
 const loadNewsDetails = async (news_id) => {
@@ -188,5 +178,5 @@ const displayNewsDetails = (newsDetails) => {
 
 
 
-loadNews(01);
+loadNews();
 loadCategories();

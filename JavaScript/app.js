@@ -27,8 +27,54 @@ const loadNews = async (categoryId) => {
     displayNews(data.data);
 }
 
-const displayNews = (news) => {
-    console.log(news);
+const displayNews = (allNews) => {
+    // console.log(allNews);
+    const newsContainer = document.getElementById("news-container");
+    newsContainer.innerHTML = ``;
+    for (const news of allNews) {
+        console.log(news);
+        const newsDiv = document.createElement("div");
+        newsDiv.classList.add("grid", "grid-rows-3", "grid-flow-col", "gap-4", "mb-4", "border-2", "border-oranger-900", "p-6");
+        newsDiv.innerHTML = `
+                <div class="row-span-3 ">
+                    <img class="w-full" src="${news.thumbnail_url}" alt="">
+                </div>
+                <div class="row-span-2 col-span-2">
+                    <h1 class="text-2xl mb-2 font-bold">
+                        ${news.title}
+                    </h1>
+                    <p>
+                        From our favourite UK influencers to the best missives from Milan and the coolest New Yorkers,
+                        read on some of the
+                        best fashion blogs out there, and for even more inspiration, do head to our separate black
+                        fashion influencer roundup.
+                        Fancy some shopping deals? Check out these amazing sales: Zara Black Friday, ASOS Black Friday,
+
+                    </p>
+                </div>
+                <div class="col-span-2">
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-1 pt-1">
+                            <img class="w-20 rounded-full" src="${news.author.img}" alt="">
+                        </div>
+                        <div class="col-span-3 me-6 pt-2">
+                            <h1 class="text-xl">${news.author.name} </h1>
+                            <p>Published On: ${news.author.published_date.split(" ")[0]} </p>
+                        </div>
+                        <div class="col-span-4 text-center ml-28 pl-16 pt-6">
+                            <h1 class="text-2xl">View: ${news.total_view}</h1>
+                        </div>
+                        <div class="col-span-4 text-end pt-6"><button
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                                Details
+                            </button></div>
+                    </div>
+            </div>
+        
+        `
+        newsContainer.appendChild(newsDiv);
+    }
+
 }
 
 

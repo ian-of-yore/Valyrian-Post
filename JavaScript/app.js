@@ -33,7 +33,7 @@ const displayNews = (allNews) => {
     const newsContainer = document.getElementById("news-container");
     newsContainer.innerHTML = ``;
     for (const news of allNews) {
-        console.log(news._id);
+        // console.log(news._id);
         const newsDiv = document.createElement("div");
         newsDiv.classList.add("grid", "grid-rows-3", "grid-flow-col", "gap-4", "mb-4", "border-2", "border-oranger-900", "p-6");
         newsDiv.innerHTML = `
@@ -65,7 +65,7 @@ const displayNews = (allNews) => {
                         <div class="col-span-4 text-center ml-28 pl-16 pt-6">
                             <h1 class="text-2xl">View: ${news.total_view}</h1>
                         </div>
-                        <div class="col-span-4 text-end pt-6"><button
+                        <div class="col-span-4 text-end pt-6"><button onclick="loadNewsDetails('${news._id}')" 
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
                                 Details
                             </button></div>
@@ -80,16 +80,15 @@ const displayNews = (allNews) => {
 
 
 const loadNewsDetails = async (news_id) => {
-    // url = `https://openapi.programming-hero.com/api/news/{news_id}`;
-    // const res = await fetch(url);
-    // const data = await res.json();
-    // console.log(data);
-    // console.log(news_id);
+    url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayNewsDetails(data.data[0]);
 
 }
 
-const displayNewsDetails = () => {
-    console.log("lmao news details shown");
+const displayNewsDetails = (newsDetails) => {
+    console.log(newsDetails);
 }
 
 

@@ -166,8 +166,7 @@ const displayNewsDetails = (newsDetails) => {
             
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Today's Pick: ${newsDetails.others_info.is_todays_pick}</button>
-        <button type="button" class="btn btn-secondary">Trending: ${newsDetails.others_info.is_trending}</button>
+        
             <button type="button" class="btn btn-secondary">Rating: ${newsDetails.rating.number}</button>
             <button type="button" class="btn btn-secondary">Badge: ${newsDetails.rating.badge}</button>
 
@@ -180,3 +179,7 @@ const displayNewsDetails = (newsDetails) => {
 
 loadNews();
 loadCategories();
+
+
+{/* <button type="button" class="btn btn-secondary">Today's Pick: ${newsDetails.others_info.is_todays_pick}</button>
+<button type="button" class="btn btn-secondary">Trending: ${newsDetails.others_info.is_trending}</button> */}

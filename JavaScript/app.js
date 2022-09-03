@@ -76,6 +76,13 @@ const displayNews = (allNews) => {
 
     }
 
+    // Sorting all news
+    // console.log(allNews);
+    allNews.sort((a, b) => {
+        return b.total_view - a.total_view;
+    });
+
+
     const newsContainer = document.getElementById("news-container");
     newsContainer.innerHTML = ``;
     for (const news of allNews) {
@@ -113,6 +120,7 @@ const displayNews = (allNews) => {
             </div>
         </div>
         `
+
         newsContainer.appendChild(newsDiv);
     }
 
@@ -180,5 +188,5 @@ const displayNewsDetails = (newsDetails) => {
 
 
 
-loadNews();
+loadNews(01);
 loadCategories();

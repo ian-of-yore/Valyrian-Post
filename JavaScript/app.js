@@ -9,13 +9,13 @@ const loadCategories = async () => {
     }
 }
 
-// const categoriesTypeArray = [];
+const categoriesTypeArray = [];
 
 const displayCategories = (categories) => {
     // console.log(categories);
     const categoriesContainer = document.getElementById("categories-container");
     categories.forEach(category => {
-        // categoriesTypeArray.push(category.category_name);
+        categoriesTypeArray.push(category.category_name);
 
         const categoryDiv = document.createElement("div");
         categoryDiv.classList.add("cursor-pointer");
@@ -37,22 +37,25 @@ const loadNews = async (categoryId) => {
 }
 
 
-// console.log(categoriesTypeArray);
+console.log(categoriesTypeArray);
 
 const displayNews = (allNews) => {
     // Displaying the availble number of news for the clicked news category
 
-    // const newsTypeLength = allNews.length;
-    // // console.log(newsTypeLength);
-    // const newsCategory = categoriesTypeArray[((allNews[0].category_id) - 1)];
-    // console.log(newsCategory);
+    const newsNumberElement = document.getElementById("news-number");
+    const newsCategoryElement = document.getElementById("news-category");
+    newsCategoryElement.innerText = "";
+    const newsTypeLength = allNews.length;
+    if (newsTypeLength === 0) {
+        newsNumberElement.innerText = "No News Items found for this category";
+    }
+    else {
+        const currentNewsType = ((allNews[0].category_id) - 1);
+        const newsCategory = categoriesTypeArray[currentNewsType];
+        newsNumberElement.innerText = newsTypeLength + " ";
+        newsCategoryElement.innerText = "Items found for " + newsCategory + " Category";
 
-    // const newsNumberElement = document.getElementById("news-number");
-    // newsNumberElement.innerText = newsTypeLength;
-    // const newsCategoryElement = document.getElementById("news-category");
-    // newsCategoryElement.innerText = newsCategory;
-
-
+    }
 
     const newsContainer = document.getElementById("news-container");
     newsContainer.innerHTML = ``;

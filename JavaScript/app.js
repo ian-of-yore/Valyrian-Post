@@ -61,42 +61,35 @@ const displayNews = (allNews) => {
         const newsDiv = document.createElement("div");
         newsDiv.classList.add("row", "m-3", "border", "p-2")
         newsDiv.innerHTML = `
-        <div class="col-lg-2 col-md-4 col-sm-12">
+        <div class="col-lg-3 col-md-4 col-sm-12">
             <img class="img-fluid card-img h-100 w-100" src="${news.thumbnail_url}">
         </div>
-        <div class="col-lg-10 col-md-8 col-sm-12">
-            <div class="card-block ">
+        <div class="col-lg-9 col-md-8 col-sm-12">
+            <div class="card-block">
                 <h4 class="card-title">${news.title}</h4>
-                <p class="card-text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. </p>
-                <p class="card-text">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum
-                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                    sunt in
-                                    culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex">
-                                        <div style="height: 3.5vh; width: 3.5vw;"><img class="img-fluid"
-                                        src="${news.author.img}" alt=""></div>
-                                        <div class="d-flex flex-column ms-2">
-                                            <h5>${news.author.name}</h5>
-                                            <p>${news.author.published_date.split(" ")[0]}</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <h5>Views: ${news.total_view}</h5>
-
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                    <button onclick="loadNewsDetails('${news._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Details
-                                    </button>
-                                    </div>
-                                </div>
-                            </div>
+                <p class="card-text mb-5" style="display: -webkit-box; -webkit-line-clamp: 8;-webkit-box-orient: vertical;
+                                    overflow: hidden; text-overflow: ellipsis;">${news.details}</p> 
+                
+            <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                    <div style="height: 3.5vh; width: 3.5vw;"><img class="img-fluid"
+                        src="${news.author.img}" alt="">
+                    </div>
+                    <div class="d-flex flex-column ms-2">
+                        <h5>${news.author.name}</h5>
+                        <p>${news.author.published_date.split(" ")[0]}</p>
+                    </div>
+                    </div>
+                        <div class="d-flex align-items-center">
+                            <h5>Views: ${news.total_view}</h5>
                         </div>
+                    <div class="d-flex align-items-center">
+                        <button onclick="loadNewsDetails('${news._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         `
         newsContainer.appendChild(newsDiv);
     }
@@ -160,5 +153,5 @@ const displayNewsDetails = (newsDetails) => {
     newsDetailsContainer.appendChild(modalDiv);
 }
 
-loadNews(02);
+loadNews(05);
 loadCategories();

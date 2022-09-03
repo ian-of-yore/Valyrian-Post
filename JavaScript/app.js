@@ -1,24 +1,32 @@
 const loadCategories = async () => {
-    const url = `https://openapi.programming-hero.com/api/news/categories`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayCategories(data.data.news_category);
+    try {
+        const url = `https://openapi.programming-hero.com/api/news/categories`;
+        const res = await fetch(url);
+        const data = await res.json();
+        displayCategories(data.data.news_category);
+    } catch (error) {
+        console.log(error);
+    }
 }
+
+// const categoriesTypeArray = [];
 
 const displayCategories = (categories) => {
     // console.log(categories);
     const categoriesContainer = document.getElementById("categories-container");
-    for (const category of categories) {
+    categories.forEach(category => {
+        // categoriesTypeArray.push(category.category_name);
+
         const categoryDiv = document.createElement("div");
         categoryDiv.classList.add("cursor-pointer");
         categoryDiv.innerHTML = `
             <h5 onclick="loadNews(${category.category_id})">${category.category_name}</h5>
         `
         categoriesContainer.appendChild(categoryDiv);
-
-        // adding event handler for click on the categories
-    }
+    })
 }
+
+
 
 const loadNews = async (categoryId) => {
     const addingZero = "0" + categoryId;
@@ -28,51 +36,67 @@ const loadNews = async (categoryId) => {
     displayNews(data.data);
 }
 
+
+// console.log(categoriesTypeArray);
+
 const displayNews = (allNews) => {
-    // console.log(allNews);
+    // Displaying the availble number of news for the clicked news category
+
+    // const newsTypeLength = allNews.length;
+    // // console.log(newsTypeLength);
+    // const newsCategory = categoriesTypeArray[((allNews[0].category_id) - 1)];
+    // console.log(newsCategory);
+
+    // const newsNumberElement = document.getElementById("news-number");
+    // newsNumberElement.innerText = newsTypeLength;
+    // const newsCategoryElement = document.getElementById("news-category");
+    // newsCategoryElement.innerText = newsCategory;
+
+
+
     const newsContainer = document.getElementById("news-container");
     newsContainer.innerHTML = ``;
     for (const news of allNews) {
-        // console.log(news._id);
+        // console.log(news.category_id);
         const newsDiv = document.createElement("div");
-        newsDiv.classList.add("grid", "grid-rows-3", "grid-flow-col", "gap-4", "mb-4", "border-2", "border-oranger-900", "p-6");
+        newsDiv.classList.add("row", "m-3", "border", "p-2")
         newsDiv.innerHTML = `
-                <div class="row-span-3 ">
-                    <img class="w-full" src="${news.thumbnail_url}" alt="">
-                </div>
-                <div class="row-span-2 col-span-2">
-                    <h1 class="text-2xl mb-2 font-bold">
-                        ${news.title}
-                    </h1>
-                    <p>
-                        From our favourite UK influencers to the best missives from Milan and the coolest New Yorkers,
-                        read on some of the
-                        best fashion blogs out there, and for even more inspiration, do head to our separate black
-                        fashion influencer roundup.
-                        Fancy some shopping deals? Check out these amazing sales: Zara Black Friday, ASOS Black Friday,
+        <div class="col-lg-2 col-md-4 col-sm-12">
+            <img class="img-fluid card-img h-100 w-100" src="${news.thumbnail_url}">
+        </div>
+        <div class="col-lg-10 col-md-8 col-sm-12">
+            <div class="card-block ">
+                <h4 class="card-title">${news.title}</h4>
+                <p class="card-text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. </p>
+                <p class="card-text">Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                                    sunt in
+                                    culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex">
+                                        <div style="height: 3.5vh; width: 3.5vw;"><img class="img-fluid"
+                                        src="${news.author.img}" alt=""></div>
+                                        <div class="d-flex flex-column ms-2">
+                                            <h5>${news.author.name}</h5>
+                                            <p>${news.author.published_date.split(" ")[0]}</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <h5>Views: ${news.total_view}</h5>
 
-                    </p>
-                </div>
-                <div class="col-span-2">
-                    <div class="grid grid-cols-12 gap-4">
-                        <div class="col-span-1 pt-1">
-                            <img class="w-20 rounded-full" src="${news.author.img}" alt="">
-                        </div>
-                        <div class="col-span-3 me-6 pt-2">
-                            <h1 class="text-xl">${news.author.name} </h1>
-                            <p class="text-xl">${news.author.published_date.split(" ")[0]} </p>
-                        </div>
-                        <div class="col-span-4 text-center ml-28 pl-16 pt-6">
-                            <h1 class="text-2xl">View: ${news.total_view}</h1>
-                        </div>
-                        <div class="col-span-4 text-end pt-6">
-                            <button onclick="loadNewsDetails('${news._id}')" class="block text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button" data-modal-toggle="popup-modal">
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                    <button onclick="loadNewsDetails('${news._id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     Details
-                            </button>
+                                    </button>
+                                    </div>
+                                </div>
                             </div>
-                    </div>
-            </div>
-        
+                        </div>
         `
         newsContainer.appendChild(newsDiv);
     }
@@ -81,17 +105,60 @@ const displayNews = (allNews) => {
 
 
 const loadNewsDetails = async (news_id) => {
-    url = `https://openapi.programming-hero.com/api/news/${news_id}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayNewsDetails(data.data[0]);
-
+    try {
+        url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        displayNewsDetails(data.data[0]);
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 
 const displayNewsDetails = (newsDetails) => {
-    console.log(newsDetails);
-}
+    const newsDetailsContainer = document.getElementById("news-details-container");
+    newsDetailsContainer.innerHTML = ``;
+    const modalDiv = document.createElement("div");
+    modalDiv.classList.add("modal-content");
+    modalDiv.innerHTML = `
+        <div class="modal-header">
+            <h5 class="modal-title">${newsDetails.title}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <img class="img-fluid mb-3" src="${newsDetails.image_url}" alt="">
+            <p>${newsDetails.details}</p>
 
+            <div class="d-flex justify-content-between">
+                    <div class="d-flex">
+                        <div style="height: 3.5vh; width: 3.5vw;">
+                            <img class="img-fluid" src="${newsDetails.author.img}" alt="">
+                        </div>
+                        <div class="d-flex flex-column ms-2">
+                            <h5>${newsDetails.author.name}</h5>
+                            <p>${newsDetails.author.published_date.split(" ")[0]}</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <h5>Total View: ${newsDetails.total_view}</h5>
+                    </div>
+            </div>
+            
+
+        </div>
+            
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Today's Pick: ${newsDetails.others_info.is_todays_pick}</button>
+        <button type="button" class="btn btn-secondary">Trending: ${newsDetails.others_info.is_trending}</button>
+            <button type="button" class="btn btn-secondary">Rating: ${newsDetails.rating.number}</button>
+            <button type="button" class="btn btn-secondary">Badge: ${newsDetails.rating.badge}</button>
+
+        </div>
+        `
+    newsDetailsContainer.appendChild(modalDiv);
+}
 
 loadNews(02);
 loadCategories();

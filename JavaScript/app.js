@@ -98,7 +98,7 @@ const displayNews = (allNews) => {
                         src="${news.author.img}" alt="">
                     </div>
                     <div class="d-flex flex-column ms-2">
-                        <h5>${news.author?.name || "No Info Available"}</h5>
+                        <h5>${news.author?.name || "Author Name Unavilable"}</h5>
                         <p>${news.author?.published_date || "Publication Date Not Avaiable"}</p>
                     </div>
                     </div>

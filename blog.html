@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <section class="w-75 mx-auto my-5">
+
+        <div class="text-center my-5">
+            <h1 class="fw-bold ">Frequently Asked Questions</h1>
+            <p>To land your dream job, you have to absolutely, one hundred percent sure about your dedication,
+                passion, resources, capacity. Here are some frequently asked questions from our learners that might
+                help you in the right direction.
+            </p>
+        </div>
+
+        <!-- Accordian Starts -->
+        <div class="accordion mb-5" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        State the differences between the use of Var, Let & Const in JavaScript.
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <span class="fw-bold">Var</span> is hoisted, always declared at the top. Which acts as a
+                        global
+                        parameter. It has functional
+                        scope,
+                        so it can be used inside anywhere of a function. In contrast, <span class="fw-bold">Let</span>
+                        acts as block scope. So, it
+                        can only be used within a block of code (curly braces{}). Let can be used to reassign or
+                        updating
+                        value but it does not allow
+                        redeclaring. Whereas,
+                        <span class="fw-bold">Const</span> is neither reassignable nor redeclarable. Variables declared
+                        with the const maintain constant values. Const also, does
+                        not support functional scope.
+                        It is contrained
+                        to be block scope. <span class="fw-bold">Var</span> was immensly used before the introduction of
+                        <span class="fw-bold">ES6</span>. Right now, <span class="fw-bold">Let</span> and
+                        <span class="fw-bold">Const</span> are more popular
+                        and adviceable to use as it serves confined purposes.
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        What is the difference between Arrow Functions & Regular Functions in JavaScript?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        The first obviouos difference would be in their syntaxes. Regular functions can be used as
+                        constructor functions but arrow
+                        function can not be used for such feat. Arrow functions also do not have <span
+                            class="fw-bold">"this"</span> keyword like the
+                        regular functions. Inside a regular JavaScript
+                        function the value of <span class="fw-bold">"this"</span> can be dynamic but for Arrow functions
+                        it is fixed throughout the
+                        entire function.
+                        Regular functions allow users to pass duplicate parameters but arrow functions do not have this
+                        felxibility.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        What is Template String in JavaScript? Mention some of it uses.
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">With the introduction of ES6, JavaScript added a new feature to write
+                        multiline code dynamically.
+                        This is known as template literals which is done by using back-ticks (``) rather than the
+                        conventional use of double ("") or single ('') quotes to define a string.
+                        This feature allows the users to insert variables and expressions into strings without needing
+                        to concatenate like in older versions of JavaScript.
+                        Template strings can be nested in each other. This is a great feature because many people want
+                        to create dynamic strings.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        What are the differences betweem "map", "forEach", "filter" & "find" in JavaScript?
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        There's a slight distinguishable difference between the use of <span
+                            class="fw-bold">forEach()</span> and <span class="fw-bold">map()</span>.
+                        Both of these options perform same type of tasks on an array but their main difference lies in
+                        what they
+                        return after the operation. Both of <span class="fw-bold">forEach()</span> and <span
+                            class="fw-bold">map()</span> is used to execute the same code on
+                        every element of
+                        the array but <span class="fw-bold">forEach()</span> does not change the array and it return the
+                        whole
+                        array. Whereas, <span class="fw-bold">map()</span>
+                        returns a new array
+                        with updated elements.
+                        <span class="fw-bold">filter()</span> and <span class="fw-bold">find()</span> are used to
+                        search for elements from a collection who satisfies certain
+                        criteria. <span class="fw-bold">filter()</span> returns
+                        every single element that fulfills a defined logic/argument but <span
+                            class="fw-bold">find()</span> only finds and returns
+                        the first element that
+                        satisfies the query instructions. After finding the first element <span
+                            class="fw-bold">find()</span> stops searching and
+                        returns only that element.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accordian Ends -->
+
+    </section>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

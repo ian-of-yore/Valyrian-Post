@@ -37,10 +37,10 @@ const displayNews = (allNews) => {
         const newsDiv = document.createElement("div");
         newsDiv.classList.add("row", "m-3", "border", "p-2")
         newsDiv.innerHTML = `
-        <div class="col-md-2">
-            <img class="img-fluid" src="${news.thumbnail_url}" class="w-100">
+        <div class="col-lg-2 col-md-4 col-sm-12">
+            <img class="img-fluid card-img h-100 w-100" src="${news.thumbnail_url}">
         </div>
-        <div class="col-md-10">
+        <div class="col-lg-10 col-md-8 col-sm-12">
             <div class="card-block ">
                 <h4 class="card-title">${news.title}</h4>
                 <p class="card-text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
